@@ -4,7 +4,12 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "clear; jasmine-node --verbose spec/"
+    "test": "clear; jasmine-node --verbose spec/",
+    "db:drop": "dropdb videoStore",
+    "db:create": "createdb videoStore",
+    "db:schema": "node tasks/load_schema.js",
+    "db:seed": "",
+    "db:reset": "npm run db:drop; npm run db:create; npm run db:schema"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -12,6 +17,7 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "jade": "~1.11.0",
+    "massive": "^2.3.0",
     "morgan": "~1.6.1",
     "sequelize": "^3.23.3",
     "serve-favicon": "~2.3.0"
