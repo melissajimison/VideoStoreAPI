@@ -33,6 +33,7 @@ CREATE TABLE rentals(
 );
 
 CREATE INDEX rentals_customer_id ON rentals (customer_id);
+CREATE INDEX rentals_status ON rentals (status);
 
 DROP TABLE IF EXISTS history;
 CREATE TABLE history(
