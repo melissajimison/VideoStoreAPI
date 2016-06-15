@@ -20,7 +20,7 @@ CREATE TABLE customers(
   state text,
   postal_code text,
   phone text,
-  account_credit integer
+  account_credit decimal
 );
 
 
