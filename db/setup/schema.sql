@@ -22,3 +22,25 @@ CREATE TABLE customers(
   phone text,
   account_credit integer
 );
+
+
+DROP TABLE IF EXISTS rentals;
+CREATE TABLE rentals(
+  id serial PRIMARY KEY,
+  movie_id integer,
+  customer_id integer,
+  status text
+);
+
+CREATE INDEX rentals_customer_id ON rentals (customer_id);
+
+DROP TABLE IF EXISTS history;
+CREATE TABLE history(
+  id serial PRIMARY KEY,
+  rental_id integer,
+  customer_id integer,
+  checkout_date text,
+  return_date text
+);
+
+CREATE INDEX history_customer_id ON history (customer_id);
