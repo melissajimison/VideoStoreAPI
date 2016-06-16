@@ -1,6 +1,5 @@
-var massive = require('massive');
-var connectionString = "postgres://localhost/videoStore";
-var db = massive.connectSync({connectionString : connectionString});
+var app = require("../app");
+var db = app.get("db");
 var data_movies = require('../db/seeds/movies.json');
 var data_customers = require('../db/seeds/customers.json');
 
