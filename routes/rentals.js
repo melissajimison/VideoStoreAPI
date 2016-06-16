@@ -3,7 +3,7 @@ var router = express.Router();
 var RentalsController = require('../controllers/rentals_controller.js');
 
 /* GET customers listing. */
-router.get('/', RentalsController.index);
+router.get('/:title', RentalsController.show);
 
 /* GET customers details. */
 // router.get('/:id', RentalsController.show);
