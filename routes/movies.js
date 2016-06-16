@@ -1,3 +1,17 @@
+var express = require('express');
+var router = express.Router();
+var MoviesController = require('../controllers/movies_controller.js');
+
+/* GET customers listing. */
+router.get('/', MoviesController.index);
+
+/* GET customers details. */
+// router.get('/:id', MoviesController.show);
+
+module.exports = router;
+
+
+
 // - GET a list of all movies (/movies)
 // * display a list to the customers.
 // * in JSON
