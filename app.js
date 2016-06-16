@@ -23,6 +23,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
+var moviesRoutes = require('./routes/movies');
+app.use('/movies', moviesRoutes);
+
+var customersRoutes = require('./routes/customers');
+app.use('/customers', customersRoutes);
+
+var rentalsRoutes = require('./routes/rentals');
+app.use('/rentals', rentalsRoutes);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
