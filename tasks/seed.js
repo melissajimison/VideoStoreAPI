@@ -9,8 +9,6 @@ for (var record of data_movies) {
   db.movies.find({title: record.title}, function(err, res){
     for (i = 0; i < record.inventory; i++) {
       db.rentals.saveSync({movie_id: res[0].id })
-      // console.log(record.title + i);
-      console.log(res[0].id);
     };
   });
 };
