@@ -24,4 +24,6 @@ find_movie: function(req, res, next) {
   });
 }
 };
+// declaring as a javascript object
+
 module.exports = RentalsController;

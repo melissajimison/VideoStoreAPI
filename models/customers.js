@@ -26,6 +26,18 @@ Customers.all = function(callback) {
   });
 };
 
+Customers.sort_by = function(options, callback) {
+  db.customers.find({}, options, function(error, customers){
+    if(error || !customers) {
+      callback(error || new Error("Could not retrieve customers"), undefined);
+    } else {
+      callback(null, customers.map(function(customer) {
+        return new Customers(customer);
+      }));
+    }
+  });
+};
+
 Customers.find = function(ids, callback) {
   db.customers.find({id: ids}, function(error, customers) {
     if(error || !customers) {
@@ -35,8 +47,11 @@ Customers.find = function(ids, callback) {
         return new Customers(customer);
       }));
     }
-  })
-}
+  });
+};
+
+
+
 
 
 module.exports = Customers;
