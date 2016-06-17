@@ -5,7 +5,10 @@ var CustomersController = require('../controllers/customers_controller.js');
 /* GET customers listing. */
 router.get('/', CustomersController.index);
 
-/* GET customers details. */
+// /* GET customers details. */
 // router.get('/:id', CustomersController.show);
+
+/* GET customers sorted by column details. */
+router.get('/sort/:column', CustomersController.sort);
 
 module.exports = router;
