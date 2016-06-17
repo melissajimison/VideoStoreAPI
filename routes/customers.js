@@ -11,4 +11,6 @@ router.get('/sort/:column', CustomersController.sort);
 /* GET customers details. */
 router.get('/:id/current', CustomersController.current);
 
+router.get('/:id/history', CustomersController.history);
+
 module.exports = router;

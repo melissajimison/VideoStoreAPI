@@ -50,6 +50,20 @@ var CustomersController = {
       }
     });
   },
+
+  history: function(req, res, next) {
+    //model has a find method that takes in 2 arguments (id, callback function)
+    Rentals.find_by_customer(req.params.id, function(error, history) {
+      if(error) {
+        var err = new Error("No history at this store");
+        err.status = 404;
+        next(err);
+      } else {
+        res.json(history); // write out the history as json
+      }
+    });
+  },
 };
+
 
 module.exports = CustomersController;

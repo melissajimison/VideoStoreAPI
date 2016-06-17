@@ -27,7 +27,7 @@ var MoviesController = {
       limit : req.query.n,
       order : req.params.column,
       offset: req.query.p
-    }
+    };
 
     // products ordered in descending fashion
     Movies.sort_by_day(options, function(error, movies) { // this is a callback
@@ -36,7 +36,7 @@ var MoviesController = {
         err.status = 404;
         next(err);
       } else {
-        res.json(movies)
+        res.json(movies);
       }
     });
   },
@@ -64,11 +64,11 @@ var MoviesController = {
               } else {
                 res.json(customers);
               }
-            })
+            });
           }
-        })
+        });
       }
-    })
+    });
   },
 };
 
