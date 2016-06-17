@@ -1,0 +1,157 @@
+
+{
+"movie_id":116,
+"customer_id": 8,
+"status": "rented",
+},
+{
+"movie_id":119,
+"customer_id": 6,
+"status": "rented",
+},
+{
+"movie_id":126,
+"customer_id": 7,
+"status": "rented",
+},
+{
+"movie_id":117,
+"customer_id": 10,
+"status": "rented",
+},
+{
+"movie_id":114,
+"customer_id": 3,
+"status": "rented",
+},
+{
+"movie_id":125,
+"customer_id": 4,
+"status": "available",
+},
+{
+"movie_id":128,
+"customer_id": 1,
+"status": "available",
+},
+{
+"movie_id":107,
+"customer_id": 8,
+"status": "available",
+},
+{
+"movie_id":112,
+"customer_id": 2,
+"status": "available",
+},
+{
+"movie_id":112,
+"customer_id": 9,
+"status": "available",
+},
+{
+"movie_id":115,
+"customer_id": 5,
+"status": "available",
+},
+{
+"movie_id":102,
+"customer_id": 10,
+"status": "available",
+},
+{
+"movie_id":104,
+"customer_id": 4,
+"status": "available",
+},
+{
+"movie_id":101,
+"customer_id": 10,
+"status": "rented",
+},
+{
+"movie_id":130,
+"customer_id": 2,
+"status": "rented",
+},
+{
+"movie_id":120,
+"customer_id": 6,
+"status": "rented",
+},
+{
+"movie_id":124,
+"customer_id": 1,
+"status": "rented",
+},
+{
+"movie_id":128,
+"customer_id": 10,
+"status": "rented",
+},
+{
+"movie_id":104,
+"customer_id": 4,
+"status": "rented",
+},
+{
+"movie_id":124,
+"customer_id": 4,
+"status": "rented",
+},
+{
+"movie_id":118,
+"customer_id": 4,
+"status": "rented",
+},
+{
+"movie_id":108,
+"customer_id": 4,
+"status": "rented",
+},
+{
+"movie_id":110,
+"customer_id": 6,
+"status": "rented",
+},
+{
+"movie_id":124,
+"customer_id": 5,
+"status": "rented",
+},
+{
+"movie_id":119,
+"customer_id": 5,
+"status": "rented",
+},
+{
+"movie_id":118,
+"customer_id": 2,
+"status": "rented",
+},
+{
+"movie_id":125,
+"customer_id": 2,
+"status": "rented",
+},
+{
+"movie_id":111,
+"customer_id": 8,
+"status": "rented",
+},
+{
+"movie_id":122,
+"customer_id": 3,
+"status": "rented",
+},
+{
+"movie_id":108,
+"customer_id": 4,
+"status": "rented",
+},
+{
+"movie_id":116,
+"customer_id": 3,
+"status": "rented",
+}
+]
