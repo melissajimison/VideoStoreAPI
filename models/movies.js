@@ -22,5 +22,16 @@ Movies.all = function(callback) {
   });
 };
 
+Movies.sort_by_day = function(options, callback) {
+  db.movies.find({}, options, function(error, movies){
+    if(error || !movies) {
+      callback(error || new Error("Could not retrieve movies"), undefined);
+    } else {
+      callback(null, movies.map(function(movie) {
+        return new Movies(movie);
+      }));
+    }
+  });
+};
 
 module.exports = Movies;

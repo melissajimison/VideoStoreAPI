@@ -2,11 +2,11 @@ var express = require('express');
 var router = express.Router();
 var MoviesController = require('../controllers/movies_controller.js');
 
-/* GET customers listing. */
+/* GET movies listing. */
 router.get('/', MoviesController.index);
 
-/* GET customers details. */
-// router.get('/:id', MoviesController.show);
+/* GET movies sorted by column details. */
+router.get('/sort/:column', MoviesController.sort);
 
 module.exports = router;
 
