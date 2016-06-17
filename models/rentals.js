@@ -2,11 +2,12 @@ var app = require("../app");
 var db = app.get("db");
 
 // Constructor function
-var Rentals = function(rentals) {
-  this.id = rentals.id;
-  this.customer_id = rentals.customer_id;
-  this.movie_id = rentals.movie_id;
-  this.status = rentals.status;
+var Rentals = function(rental) {
+  this.id = rental.id;
+  this.movie_id = rental.movie_id;
+  this.customer_id = rental.customer_id;
+  this.status = rental.status;
+
 };
 // find the movies by customer id
 // an array of customer ids
@@ -26,17 +27,17 @@ Rentals.find_by_customer = function(customer_id, callback) {
 
 // when movies are returned the customer id will be deleted from the rentals table
 
-// Customers.all = function(callback) {
-//   db.customers.find(function(error, customers) {
-//     if(error || !customers) {
-//       callback(error || new Error("Could not retrieve customers"), undefined);
-//     } else {
-//       callback(null, customers.map(function(customer) {
-//         return new Customers(customer.id);
-//       }));
-//     }
-//   });
-// };
-
+Rentals.get_customer_ids = function(movie_id, callback) {
+  db.rentals.find({movie_id: movie_id}, function(error, rentals) {
+    if(error || !rentals) {
+      callback(error || new Error("Could not retrieve rentals"), undefined);
+    } else {
+      callback(null, rentals.map(function(rental) {
+        var rental = new Rentals(rental);
+        return rental.customer_id;
+      }));
+    }
+  })
+}
 
 module.exports = Rentals;

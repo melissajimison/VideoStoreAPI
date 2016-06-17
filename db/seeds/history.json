@@ -1,0 +1,38 @@
+[
+{
+"rental_id": 1,
+"customer_id": 1,
+"checkout_date": "1960-06-16",
+"return_date": "1960-06-26"
+},
+{
+"rental_id": 7,
+"customer_id": 3,
+"checkout_date": "1990-06-16",
+"return_date": "1990-06-26"
+},
+{
+"rental_id": 12,
+"customer_id": 2,
+"checkout_date": "1999-06-16",
+"return_date": "1999-06-26"
+},
+{
+"rental_id": 4,
+"customer_id": 1,
+"checkout_date": "1998-06-16",
+"return_date": "1998-06-26"
+},
+{
+"rental_id": 9,
+"customer_id": 11,
+"checkout_date": "2002-06-16",
+"return_date": "2002-06-26"
+},
+{
+"rental_id": 14,
+"customer_id": 2,
+"checkout_date": "2004-06-16",
+"return_date": "2004-06-26"
+}
+]

@@ -3,11 +3,15 @@ var connectionString = "postgres://localhost/videoStore";
 var db = massive.connectSync({connectionString : connectionString});
 var data_movies = require('../db/seeds/movies.json');
 var data_customers = require('../db/seeds/customers.json');
+var data_history = require('../db/seeds/history.json');
 
 for (var record of data_movies) {
   db.movies.saveSync(record);
 }
 
+for (var record of data_history) {
+  db.history.saveSync(record);
+};
 
 db.movies.find(function(err, res){
   for (var movie of res) {
@@ -23,7 +27,5 @@ for (var record of data_customers) {
 
 db.rentals.saveSync({id: [10, 11, 12], status: 'rented', customer_id: 2});
 db.rentals.saveSync({id: [13, 14, 15], status: 'rented', customer_id: 4});
-
-
 
 process.exit( );

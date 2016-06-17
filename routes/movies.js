@@ -8,6 +8,9 @@ router.get('/', MoviesController.index);
 /* GET movies sorted by column details. */
 router.get('/sort/:column', MoviesController.sort);
 
+/* GET customers that currently have the film */
+router.get('/:title/current', MoviesController.current)
+
 module.exports = router;
 
 
