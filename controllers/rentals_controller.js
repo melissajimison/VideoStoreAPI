@@ -1,19 +1,24 @@
-var Rentals = require("../models/movies");
+var Rentals = require('../models/rentals');
+var Movies = require("../models/movies");
 
-show: function(req, res, next) {
-  Rental.find(req.params.id, function(error, account) {
+var RentalsController = {
+
+find_movie: function(req, res, next) {
+  var movie = req.params.title;
+
+  Movies.find(movie, function(error, found_movie) {
     if(error) {
-      var err = new Error("No such account");
+      var err = new Error("No such movie");
       err.status = 404;
       next(err);
     } else {
-      account.getBalance(function(error, balance) {
-        res.render("accounts/show", {
-          account: {
-            id: account.id,
-            balance: balance
-          }
-        });
+      obj = {}
+      obj['Synopsis'] = found_movie.overview;
+      obj['Release Date'] = found_movie.release_date;
+      obj['Total Inventory'] = found_movie.inventory;
+      Rentals.available(found_movie.id, function(err, number){
+        obj['Available Inventory'] = number
+        res.json(obj);
       });
     }
   });
