@@ -23,9 +23,20 @@ Customers.all = function(callback) {
         return new Customers(customer);
       }));
     }
-    // callback(null, "melissa");
   });
 };
+
+Customers.find = function(ids, callback) {
+  db.customers.find({id: ids}, function(error, customers) {
+    if(error || !customers) {
+      callback(error || new Error("Could not retrieve customers"), undefined);
+    } else {
+      callback(null, customers.map(function(customer) {
+        return new Customers(customer);
+      }));
+    }
+  })
+}
 
 
 module.exports = Customers;

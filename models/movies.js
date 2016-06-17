@@ -34,4 +34,15 @@ Movies.sort_by_day = function(options, callback) {
   });
 };
 
+Movies.find = function(title, callback) {
+  db.movies.findOne({title: title}, function(error, movie) {
+    if(error || !movie) {
+      callback(error || new Error("Could not retrieve movie"), undefined);
+    } else {
+
+      callback(null, new Movies(movie));
+    }
+  });
+}
+
 module.exports = Movies;
