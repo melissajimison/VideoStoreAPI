@@ -3,7 +3,6 @@ var connectionString = "postgres://localhost/videoStore";
 var db = massive.connectSync({connectionString : connectionString});
 var data_movies = require('../db/seeds/movies.json');
 var data_customers = require('../db/seeds/customers.json');
-var data_rentals = require('../db/seeds/rentals.json');
 
 for (var record of data_movies) {
   db.movies.saveSync(record);
