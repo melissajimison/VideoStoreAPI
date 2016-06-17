@@ -1,4 +1,5 @@
 var Customers = require("../models/customers");
+var Rentals = require("../models/rentals");
 
 var CustomersController = {
   index: function(req, res, next) {
@@ -35,21 +36,20 @@ var CustomersController = {
       }
     });
   },
-
-
+  // this is a property whose value is a function (this is now a method)
+  // this is the response from node
   current: function(req, res, next) {
-    // passed the callback
-    Customers.find(req.params.id, function(error, customers) { // calling the find method on customers
+    //model has a find method that takes in 2 arguments (id, callback function)
+    Rentals.find_by_customer(req.params.id, function(error, rentals) {
       if(error) {
-        var err = new Error ("No checkout information");
+        var err = new Error("No such account");
         err.status = 404;
         next(err);
       } else {
-        res.json(movies);
+        res.json(rentals); // write out the rentals as json
       }
     });
-  };
-}
-
+  },
+};
 
 module.exports = CustomersController;

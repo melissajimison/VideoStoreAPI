@@ -6,6 +6,6 @@ var RentalsController = require('../controllers/rentals_controller.js');
 router.get('/:title', RentalsController.show);
 
 /* GET customers details. */
-// router.get('/:id', RentalsController.show);
+router.get('/:id/current', RentalsController.current);
 
 module.exports = router;
