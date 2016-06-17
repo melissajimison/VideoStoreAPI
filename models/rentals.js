@@ -9,7 +9,7 @@ var Rentals = function(rental) {
   this.status = rental.status;
 };
 
-Rentals.get_rentals = function(movie_id, callback) {
+Rentals.get_customer_ids = function(movie_id, callback) {
   db.rentals.find({movie_id: movie_id}, function(error, rentals) {
     if(error || !rentals) {
       callback(error || new Error("Could not retrieve rentals"), undefined);
@@ -21,6 +21,5 @@ Rentals.get_rentals = function(movie_id, callback) {
     }
   })
 }
-
 
 module.exports = Rentals;
