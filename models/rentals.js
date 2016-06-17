@@ -22,5 +22,14 @@ Rentals.get_rentals = function(movie_id, callback) {
   })
 }
 
+Rentals.available = function(movie_id, callback){
+  db.rentals.find({movie_id: movie_id}, function(error, rentals) {
+    if(error || !rentals) {
+      callback(error || new Error("Could not retrieve rentals"), undefined);
+    } else {
+      callback(null, rentals);
+    }
+  });
+}
 
 module.exports = Rentals;
