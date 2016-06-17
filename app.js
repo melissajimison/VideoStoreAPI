@@ -34,8 +34,8 @@ app.use('/movies', moviesRoutes);
 var customersRoutes = require('./routes/customers');
 app.use('/customers', customersRoutes);
 
-// var rentalsRoutes = require('./routes/rentals');
-// app.use('/rentals', rentalsRoutes);
+var rentalsRoutes = require('./routes/rentals');
+app.use('/rentals', rentalsRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
