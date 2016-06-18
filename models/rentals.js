@@ -45,7 +45,7 @@ Rentals.available = function(movie_id, callback){
     if(error || !rentals) {
       callback(error || new Error("Could not retrieve rentals"), undefined);
     } else {
-      callback(null, rentals);
+      callback(null, rentals.length);
     }
   });
 }
