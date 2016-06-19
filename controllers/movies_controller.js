@@ -86,39 +86,49 @@ var MoviesController = {
     var movie = req.params.title;
     var column = req.params.column;
 
-    Movies.find(movie, function(error, found_movie) {
+    Movies.find_customers_by_history(movie, function(error, customers) {
       if(error) {
         var err = new Error("No such movie");
         err.status = 404;
         next(err);
       } else {
-        Rentals.get_rental_ids(found_movie.id, function(error, rental_ids) {
-          if(error) {
-            var err = new Error("No such rental");
-            err.status = 404;
-            next(err);
-          } else {
-            History.get_customer_ids(rental_ids, function(error, customer_ids) {
-              if(error) {
-                var err = new Error("No such history");
-                err.status = 404;
-                next(err);
-              } else {
-                Customers.find(customer_ids, function(error, customers) {
-                  if(error) {
-                    var err = new Error("No such customers");
-                    err.status = 404;
-                    next(err);
-                  } else {
-                    res.json(customers);
-                  }
-                })
-              }
-            })
-          }
-        })
+        res.json(customers);
       }
     })
+
+    // Movies.find(movie, function(error, found_movie) {
+    //   if(error) {
+    //     var err = new Error("No such movie");
+    //     err.status = 404;
+    //     next(err);
+    //   } else {
+    //     Rentals.get_rental_ids(found_movie.id, function(error, rental_ids) {
+    //       if(error) {
+    //         var err = new Error("No such rental");
+    //         err.status = 404;
+    //         next(err);
+    //       } else {
+    //         History.get_customer_ids(rental_ids, function(error, customer_ids) {
+    //           if(error) {
+    //             var err = new Error("No such history");
+    //             err.status = 404;
+    //             next(err);
+    //           } else {
+    //             Customers.find(customer_ids, function(error, customers) {
+    //               if(error) {
+    //                 var err = new Error("No such customers");
+    //                 err.status = 404;
+    //                 next(err);
+    //               } else {
+    //                 res.json(customers);
+    //               }
+    //             })
+    //           }
+    //         })
+    //       }
+    //     })
+    //   }
+    // })
   }
 };
 
