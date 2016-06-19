@@ -85,8 +85,15 @@ var MoviesController = {
   history: function(req, res, next) {
     var movie = req.params.title;
     var column = req.params.column;
+    var order_by = 'order by customers.id';
 
-    Movies.find_customers_by_history(movie, function(error, customers) {
+    if (column === 'name') {
+      order_by = 'order by customers.name';
+    } else if (column === 'checkout_date') {
+      order_by = 'order by history.checkout_date';
+    }
+
+    Movies.find_customers_by_history(movie, order_by, function(error, customers) {
       if(error) {
         var err = new Error("No such movie");
         err.status = 404;
