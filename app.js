@@ -10,7 +10,9 @@ var app = module.exports = express();
 
 // database setup
 var connectionString = "postgres://localhost/videoStore";
+// the node module that is used to access the database
 var db = massive.connectSync({connectionString: connectionString});
+// this gives me a way to grab the database from the code, like in the model 
 app.set('db', db);
 
 // view engine setup
@@ -34,8 +36,8 @@ app.use('/movies', moviesRoutes);
 var customersRoutes = require('./routes/customers');
 app.use('/customers', customersRoutes);
 
-// var rentalsRoutes = require('./routes/rentals');
-// app.use('/rentals', rentalsRoutes);
+var rentalsRoutes = require('./routes/rentals');
+app.use('/rentals', rentalsRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
