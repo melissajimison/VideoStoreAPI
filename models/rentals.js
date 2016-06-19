@@ -40,17 +40,4 @@ Rentals.get_customer_ids = function(movie_id, callback) {
   })
 }
 
-Rentals.get_rental_ids = function(movie_id, callback) {
-  db.rentals.find({movie_id: movie_id}, function(error, rentals) {
-    if(error || !rentals) {
-      callback(error || new Error("Could not retrieve rentals"), undefined);
-    } else {
-      callback(null, rentals.map(function(rental) {
-        var rental = new Rentals(rental);
-        return rental.id;
-      }));
-    }
-  })
-}
-
 module.exports = Rentals;

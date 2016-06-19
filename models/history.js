@@ -10,18 +10,4 @@ var History = function(history) {
   this.return_date = history.return_date;
 };
 
-History.get_customer_ids = function(rental_ids, callback) {
-  db.history.find({rental_id: rental_ids}, function(error, histories) {
-    if(error || !histories) {
-      callback(error || new Error("Could not retrieve histories"), undefined);
-    } else {
-      callback(null, histories.map(function(history) {
-        var history = new History(history);
-        return history.customer_id;
-      }));
-    }
-  })
-}
-
-
 module.exports = History;
