@@ -1,5 +1,6 @@
 var app = require("../app");
 var db = app.get("db");
+var Customers = require('../models/customers');
 
 // Constructor function
 var Movies = function(movie) {
@@ -39,9 +40,32 @@ Movies.find = function(title, callback) {
     if(error || !movie) {
       callback(error || new Error("Could not retrieve movie"), undefined);
     } else {
-
       callback(null, new Movies(movie));
     }
+  });
+}
+
+Movies.find_customers_by_title = function(title, callback) {
+  db.run("select customers.name, customers.phone, customers.account_credit from movies INNER JOIN rentals on movies.id=rentals.movie_id inner join customers on rentals.customer_id=customers.id where title = $1", [title], function(error, customers) {
+    if(error || !customers) {
+      callback(error || new Error("Could not retrieve customers"), undefined);
+    } else {
+      callback(null, customers.map(function(customer) {
+        return new Customers(customer);
+      }));
+    };
+  });
+}
+
+Movies.find_customers_by_history = function(title, callback) {
+  db.run("select customers.name, customers.phone, customers.account_credit from movies INNER JOIN rentals on movies.id=rentals.movie_id inner join history on rentals.id=history.rental_id inner join customers on history.customer_id=customers.id where title = $1", [title], function(error, customers) {
+    if(error || !customers) {
+      callback(error || new Error("Could not retrieve customers"), undefined);
+    } else {
+      callback(null, customers.map(function(customer) {
+        return new Customers(customer);
+      }));
+    };
   });
 }
 

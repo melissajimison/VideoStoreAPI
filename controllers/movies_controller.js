@@ -1,6 +1,7 @@
 var Movies = require("../models/movies");
 var Rentals = require('../models/rentals');
 var Customers = require('../models/customers');
+var History = require('../models/history');
 
 var MoviesController = {
   index: function(req, res, next) {
@@ -44,32 +45,58 @@ var MoviesController = {
   current: function(req, res, next) {
     var movie = req.params.title;
 
-    Movies.find(movie, function(error, found_movie) {
+    Movies.find_customers_by_title(movie, function(error, customers) {
       if(error) {
         var err = new Error("No such movie");
         err.status = 404;
         next(err);
       } else {
-        Rentals.get_customer_ids(found_movie.id, function(error, customer_ids) {
-          if(error) {
-            var err = new Error("No such rentals");
-            err.status = 404;
-            next(err);
-          } else {
-            Customers.find(customer_ids, function(error, customers) {
-              if(error) {
-                var err = new Error("No such customers");
-                err.status = 404;
-                next(err);
-              } else {
-                res.json(customers);
-              }
-            });
-          }
-        });
+        res.json(customers);
       }
-    });
+    })
+
+    // Movies.find(movie, function(error, found_movie) {
+    //   if(error) {
+    //     var err = new Error("No such movie");
+    //     err.status = 404;
+    //     next(err);
+    //   } else {
+    //     Rentals.get_customer_ids(found_movie.id, function(error, customer_ids) {
+    //       if(error) {
+    //         var err = new Error("No such rentals");
+    //         err.status = 404;
+    //         next(err);
+    //       } else {
+    //         Customers.find(customer_ids, function(error, customers) {
+    //           if(error) {
+    //             var err = new Error("No such customers");
+    //             err.status = 404;
+    //             next(err);
+    //           } else {
+    //             res.json(customers);
+    //           }
+    //         })
+    //       }
+    //     })
+    //   }
+    // })
   },
+
+  history: function(req, res, next) {
+    var movie = req.params.title;
+    var column = req.params.column;
+
+    Movies.find_customers_by_history(movie, function(error, customers) {
+      if(error) {
+        var err = new Error("No such movie");
+        err.status = 404;
+        next(err);
+      } else {
+        res.json(customers);
+      }
+    })
+  }
 };
 
 module.exports = MoviesController;
+
