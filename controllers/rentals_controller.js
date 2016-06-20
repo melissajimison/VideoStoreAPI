@@ -14,11 +14,13 @@ var RentalsController = {
         next(err);
       } else {
         obj = {}
-        obj['Synopsis'] = found_movie.overview;
-        obj['Release Date'] = found_movie.release_date;
-        obj['Total Inventory'] = found_movie.inventory;
+        obj['status'] = 200;
+        obj['Movie Info'] = {};
+        obj['Movie Info']['Synopsis'] = found_movie.overview;
+        obj['Movie Info']['Release Date'] = found_movie.release_date;
+        obj['Movie Info']['Total Inventory'] = found_movie.inventory;
         Rentals.available(found_movie.id, function(err, number){
-          obj['Available Inventory'] = number
+          obj['Movie Info']['Available Inventory'] = number
           res.json(obj);
         });
       }
