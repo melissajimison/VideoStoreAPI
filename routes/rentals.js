@@ -8,7 +8,7 @@ router.get('/:title', RentalsController.find_movie);
 /* GET customers details. */
 // router.get('/:id/current', RentalsController.current);
 
-router.get('/:title/customers', RentalsController.find_customers);
+router.get('/:title/customers', RentalsController.current_customers);
 
 
 module.exports = router;
