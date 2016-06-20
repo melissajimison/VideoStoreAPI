@@ -1,5 +1,6 @@
 var app = require("../app");
 var db = app.get("db");
+var Customers = require('../models/customers');
 
 // Constructor function
 var Rentals = function(rental) {
@@ -64,5 +65,18 @@ Rentals.get_customer_ids_of_rented = function(movie_id, callback) {
     }
   });
 };
+
+//Melissa is using this. dont delete
+Rentals.find_customers_by_title = function(title, callback) {
+  db.sql.rentals.currentCustomers([title], function(error, customers) {
+    if(error || !customers) {
+      callback(error || new Error("Could not retrieve customers"), undefined);
+    } else {
+      callback(null, customers.map(function(customer) {
+        return new Customers(customer);
+      }));
+    };
+  });
+}
 
 module.exports = Rentals;
