@@ -25,7 +25,7 @@ var RentalsController = {
     });
   },
 
-  find_customers: function(req, res, next) {
+  current_customers: function(req, res, next) {
     var movie = req.params.title;
 
     Movies.find(movie, function(error, found_movie) {
