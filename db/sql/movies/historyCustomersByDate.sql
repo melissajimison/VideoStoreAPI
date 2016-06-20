@@ -1,5 +1,5 @@
 SELECT DISTINCT customers.id, customers.name, customers.phone, customers.account_credit, history.checkout_date FROM movies
-  INNER JOIN rentals 
+  INNER JOIN rentals
   ON movies.id=rentals.movie_id
     INNER JOIN history
     ON rentals.id=history.rental_id
