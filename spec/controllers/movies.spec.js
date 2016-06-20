@@ -35,7 +35,7 @@ describe("Endpoint at /sort", function () {
 
   it('responds with a 200 status code for mispelling', function (done) {
     request.get(url('/released-date?n=10&p=1'), function(error, response, body) {
-      expect(response.statusCode).toEqual(200);
+      expect(response.statusCode).toEqual(404);
       done();
     });
   });
