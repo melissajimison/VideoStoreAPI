@@ -11,7 +11,14 @@ var MoviesController = {
         err.status = 500;
         next(err);
       } else {
-        res.json(movies);
+        var obj = {};
+        if (movies.length === 0) {
+          obj["status"] = 204;
+        } else {
+          obj["status"] = 200;
+        }
+        obj["movies"] = movies;
+        res.json(obj);
         // var locals = { accounts : accounts};
         // res.render("accounts/index",locals);
         }
@@ -37,7 +44,14 @@ var MoviesController = {
         err.status = 404;
         next(err);
       } else {
-        res.json(movies);
+        var obj = {};
+        if (movies.length === 0) {
+          obj["status"] = 204;
+        } else {
+          obj["status"] = 200;
+        }
+        obj["movies"] = movies;
+        res.json(obj);
       }
     });
   },
@@ -51,7 +65,14 @@ var MoviesController = {
         err.status = 404;
         next(err);
       } else {
-        res.json(customers);
+        var obj = {};
+        if (customers.length === 0) {
+          obj["status"] = 204;
+        } else {
+          obj["status"] = 200;
+        }
+        obj["customers"] = customers;
+        res.json(obj);
       }
     })
 
@@ -99,7 +120,14 @@ var MoviesController = {
         err.status = 404;
         next(err);
       } else {
-        res.json(customers);
+        var obj = {};
+        if (customers.length === 0) {
+          obj["status"] = 204;
+        } else {
+          obj["status"] = 200;
+        }
+        obj["customers"] = customers;
+        res.json(obj);
       }
     })
   }
