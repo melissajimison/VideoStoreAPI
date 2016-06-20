@@ -50,4 +50,19 @@ Rentals.available = function(movie_id, callback){
   });
 }
 
+Rentals.get_customer_ids_of_rented = function(movie_id, callback) {
+                    // key value that matches one of the column names in the rentals TABLE
+                    // value is the specific value that we want to look for in the table
+  db.rentals.find({movie_id : movie_id, status: "rented"}, function(error, rentals) {
+    if(error || !rentals) {
+      callback(error || new Error("Could not retrieve your rentals"), undefined);
+    } else {
+      callback(null, rentals.map(function(rental) {
+        var rental = new Rentals(rental);
+         return rental.customer_id
+      }));
+    }
+  });
+};
+
 module.exports = Rentals;
