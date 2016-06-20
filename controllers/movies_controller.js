@@ -1,14 +1,13 @@
 var Movies = require("../models/movies");
 var Rentals = require('../models/rentals');
 var Customers = require('../models/customers');
-var History = require('../models/history');
 
 var MoviesController = {
   index: function(req, res, next) {
     Movies.all(function(error, movies) { // this is a callback
       if(error) {
         var err = new Error("Error retrieving movies list:\n" + error.message);
-        err.status = 500;
+        err.status = 404;
         next(err);
       } else {
         var obj = {};
@@ -19,9 +18,7 @@ var MoviesController = {
         }
         obj["movies"] = movies;
         res.json(obj);
-        // var locals = { accounts : accounts};
-        // res.render("accounts/index",locals);
-        }
+      }
     });
   },
 
@@ -75,48 +72,24 @@ var MoviesController = {
         res.json(obj);
       }
     })
-
-    // Movies.find(movie, function(error, found_movie) {
-    //   if(error) {
-    //     var err = new Error("No such movie");
-    //     err.status = 404;
-    //     next(err);
-    //   } else {
-    //     Rentals.get_customer_ids(found_movie.id, function(error, customer_ids) {
-    //       if(error) {
-    //         var err = new Error("No such rentals");
-    //         err.status = 404;
-    //         next(err);
-    //       } else {
-    //         Customers.find(customer_ids, function(error, customers) {
-    //           if(error) {
-    //             var err = new Error("No such customers");
-    //             err.status = 404;
-    //             next(err);
-    //           } else {
-    //             res.json(customers);
-    //           }
-    //         })
-    //       }
-    //     })
-    //   }
-    // })
   },
 
   history: function(req, res, next) {
     var movie = req.params.title;
     var column = req.params.column;
-    var order_by = 'order by customers.id';
+    var order_by;
 
     if (column === 'name') {
-      order_by = 'order by customers.name';
+      order_by = 'name';
     } else if (column === 'checkout_date') {
-      order_by = 'order by history.checkout_date';
+      order_by = 'checkout_date';
     }
+
+    console.log(order_by);
 
     Movies.find_customers_by_history(movie, order_by, function(error, customers) {
       if(error) {
-        var err = new Error("No such movie");
+        var err = new Error("No such movie: " + error.message);
         err.status = 404;
         next(err);
       } else {

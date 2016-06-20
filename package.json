@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "clear; jasmine-node --verbose spec/",
+    "test": "clear; jasmine-node --captureExceptions --verbose spec/",
     "db:drop": "dropdb videoStore",
     "db:create": "createdb videoStore",
     "db:schema": "node tasks/load_schema.js",

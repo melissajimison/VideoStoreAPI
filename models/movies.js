@@ -58,15 +58,27 @@ Movies.find_customers_by_title = function(title, callback) {
 }
 
 Movies.find_customers_by_history = function(title, order_by, callback) {
-  db.run("select customers.name, customers.phone, customers.account_credit from movies INNER JOIN rentals on movies.id=rentals.movie_id inner join history on rentals.id=history.rental_id inner join customers on history.customer_id=customers.id where title = $1" + order_by, [title], function(error, customers) {
-    if(error || !customers) {
-      callback(error || new Error("Could not retrieve customers"), undefined);
-    } else {
-      callback(null, customers.map(function(customer) {
-        return new Customers(customer);
-      }));
-    };
-  });
+  if (order_by === 'name') {
+    db.sql.movies.historyCustomersByName(title, function(error, customers) {
+      if(error || !customers) {
+        callback(error || new Error("Could not retrieve customers"), undefined);
+      } else {
+        callback(null, customers.map(function(customer) {
+          return new Customers(customer);
+        }));
+      };
+    });
+  } else if (order_by === 'checkout_date') {
+    db.sql.movies.historyCustomersByDate(title, function(error, customers) {
+      if(error || !customers) {
+        callback(error || new Error("Could not retrieve customers"), undefined);
+      } else {
+        callback(null, customers.map(function(customer) {
+          return new Customers(customer);
+        }));
+      };
+    });
+  }
 }
 
 module.exports = Movies;

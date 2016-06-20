@@ -3,4 +3,4 @@ SELECT customers.name, customers.phone, customers.account_credit FROM movies
   ON movies.id=rentals.movie_id
     INNER JOIN customers
     ON rentals.customer_id=customers.id
-WHERE title = $1
+WHERE title = $1;
