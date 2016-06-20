@@ -22,3 +22,6 @@ History.find_by_customer_id = function(ids, callback) {
     }
   });
 };
+};
+
+module.exports = History;

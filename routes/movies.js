@@ -9,7 +9,11 @@ router.get('/', MoviesController.index);
 router.get('/sort/:column', MoviesController.sort);
 
 /* GET customers that currently have the film */
-router.get('/:title/current', MoviesController.current)
+router.get('/:title/current', MoviesController.current);
+
+// /movies/Jaws/history/sort/name
+/* GET customers that have checkout out the film in the past */
+router.get('/:title/history/sort/:column', MoviesController.history);
 
 module.exports = router;
 
