@@ -12,27 +12,11 @@ var Movies = function(movie) {
 };
 
 Movies.all = function(callback) {
-  db.movies.find(function(error, movies) {
-    if(error || !movies) {
-      callback(error || new Error("Could not retrieve movies"), undefined);
-    } else {
-      callback(null, movies.map(function(movie) {
-        return new Movies(movie);
-      }));
-    }
-  });
+  db.movies.find(movies_callback(callback));
 };
 
-Movies.sort_by_day = function(options, callback) {
-  db.movies.find({}, options, function(error, movies){
-    if(error || !movies) {
-      callback(error || new Error("Could not retrieve movies"), undefined);
-    } else {
-      callback(null, movies.map(function(movie) {
-        return new Movies(movie);
-      }));
-    }
-  });
+Movies.sort_by = function(options, callback) {
+  db.movies.find({}, options, movies_callback(callback));
 };
 
 Movies.find = function(title, callback) {
@@ -46,27 +30,39 @@ Movies.find = function(title, callback) {
 };
 
 Movies.find_customers_by_title = function(title, callback) {
-  db.sql.movies.currentCustomers([title], function(error, customers) {
-    if(error || !customers) {
-      callback(error || new Error("Could not retrieve customers"), undefined);
-    } else {
-      callback(null, customers.map(function(customer) {
-        return new Customers(customer);
-      }));
-    }
-  });
-};
+  db.sql.movies.currentCustomers([title], customer_callback(callback));
+}
 
 Movies.find_customers_by_history = function(title, order_by, callback) {
-  db.run("select customers.name, customers.phone, customers.account_credit from movies INNER JOIN rentals on movies.id=rentals.movie_id inner join history on rentals.id=history.rental_id inner join customers on history.customer_id=customers.id where title = $1" + order_by, [title], function(error, customers) {
+  if (order_by === 'name') {
+    db.sql.movies.historyCustomersByName(title, customer_callback(callback));
+  } else if (order_by === 'checkout_date') {
+    db.sql.movies.historyCustomersByDate(title, customer_callback(callback));
+  }
+}
+
+function customer_callback(passed_callback) {
+  return function(error, customers) {
     if(error || !customers) {
-      callback(error || new Error("Could not retrieve customers"), undefined);
+      passed_callback(error || new Error("Could not retrieve customers"), undefined);
     } else {
-      callback(null, customers.map(function(customer) {
+      passed_callback(null, customers.map(function(customer) {
         return new Customers(customer);
       }));
     }
-  });
-};
+  };
+}
+
+function movies_callback(passed_callback) {
+  return function(error, movies) {
+    if(error || !movies) {
+      passed_callback(error || new Error("Could not retrieve movies"), undefined);
+    } else {
+      passed_callback(null, movies.map(function(movie) {
+        return new Movies(movie);
+      }));
+    }
+  };
+}
 
 module.exports = Movies;
