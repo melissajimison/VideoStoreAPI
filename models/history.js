@@ -11,17 +11,15 @@ var History = function(history) {
 
 };
 
-History.find_by_customer_id = function(ids, callback) {
-  db.customers.find({id: ids}, function(error, customers) {
-    if(error || !customers) {
-      callback(error || new Error("Could not retrieve information"), undefined);
+History.getPastRentalHistory = function(customer_id, callback) {
+  db.run("SELECT customer_id, checkout_date, return_date FROM history WHERE customer_id=$1 AND returned=$2 ORDER BY return_date ASC", [customer_id, true], function(error, history) {
+    if(error) {
+      callback(error, undefined);
     } else {
-      callback(null, customers.map(function(customer) {
-        return new History(customer);
-      }));
+      callback(null, history);
     }
   });
 };
-};
+
 
 module.exports = History;

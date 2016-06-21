@@ -43,7 +43,7 @@ Movies.find = function(title, callback) {
       callback(null, new Movies(movie));
     }
   });
-}
+};
 
 Movies.find_customers_by_title = function(title, callback) {
   db.sql.movies.currentCustomers([title], function(error, customers) {
@@ -53,9 +53,9 @@ Movies.find_customers_by_title = function(title, callback) {
       callback(null, customers.map(function(customer) {
         return new Customers(customer);
       }));
-    };
+    }
   });
-}
+};
 
 Movies.find_customers_by_history = function(title, order_by, callback) {
   db.run("select customers.name, customers.phone, customers.account_credit from movies INNER JOIN rentals on movies.id=rentals.movie_id inner join history on rentals.id=history.rental_id inner join customers on history.customer_id=customers.id where title = $1" + order_by, [title], function(error, customers) {
@@ -65,8 +65,8 @@ Movies.find_customers_by_history = function(title, order_by, callback) {
       callback(null, customers.map(function(customer) {
         return new Customers(customer);
       }));
-    };
+    }
   });
-}
+};
 
 module.exports = Movies;
