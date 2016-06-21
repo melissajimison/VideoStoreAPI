@@ -50,23 +50,22 @@ var RentalsController = {
   },
 
   checkout: function(req, res, next) {
-    var id = req.params.id;
+    var customer_id = req.params.id;
     var movie = req.params.title;
-  Rentals.mark_as_checkout (movie, id, function(error, customers) {
-    if(error) {
-      var err = new Error("No such movie");
-      err.status = 404;
-      next(err);
-    } else {
 
 
-
-
-    obj = {}
-    obj["id"] = id
-    obj["movie"] = movie
-
-    res.json(obj);
-  },
+    Rentals.mark_as_checkout (movie, customer_id, function(error, rental_count) {
+      if(error) {
+        var err = new Error("No such movie");
+        err.status = 404;
+        next(err);
+      } else {
+        obj = {}
+        obj["status"] = 200
+        obj["message"] = rental_count
+        res.json(obj);
+      }
+    })
+  }
 };
 module.exports = RentalsController;
