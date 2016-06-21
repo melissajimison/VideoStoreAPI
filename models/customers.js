@@ -38,17 +38,7 @@ Customers.sort_by = function(options, callback) {
   });
 };
 
-Customers.find = function(ids, callback) {
-  db.customers.find({id: ids}, function(error, customers) {
-    if(error || !customers) {
-      callback(error || new Error("Could not retrieve customers"), undefined);
-    } else {
-      callback(null, customers.map(function(customer) {
-        return new Customers(customer);
-      }));
-    }
-  });
-};
+
 
 
 

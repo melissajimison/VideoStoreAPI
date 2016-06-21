@@ -12,7 +12,7 @@ var History = function(history) {
 };
 
 History.getPastRentalHistory = function(customer_id, callback) {
-  db.run("SELECT customer_id, checkout_date, return_date FROM history WHERE customer_id=$1 AND returned=$2 ORDER BY return_date ASC", [customer_id, true], function(error, history) {
+  db.run("SELECT customer_id, checkout_date, return_date FROM history WHERE customer_id=$1 ORDER BY return_date ASC", [customer_id], function(error, history) {
     if(error) {
       callback(error, undefined);
     } else {
