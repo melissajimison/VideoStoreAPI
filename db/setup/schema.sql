@@ -41,7 +41,8 @@ CREATE TABLE history(
   rental_id integer,
   customer_id integer,
   checkout_date text,
-  return_date text
+  return_date text,
+  overdue boolean
 );
 
 CREATE INDEX history_customer_id ON history (customer_id);
