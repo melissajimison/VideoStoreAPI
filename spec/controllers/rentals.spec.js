@@ -2,7 +2,7 @@ var request = require('request');
 var base_url = "http://localhost:3000/";
 
 
-describe("Endpoint at /Jaws", function () {
+describe("Endpoint at /", function () {
   var url = function(endpoint) {
     return base_url + "rentals" + endpoint;
   };
