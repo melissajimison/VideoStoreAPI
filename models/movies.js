@@ -15,7 +15,7 @@ Movies.all = function(callback) {
   db.movies.find(movies_callback(callback));
 };
 
-Movies.sort_by_day = function(options, callback) {
+Movies.sort_by = function(options, callback) {
   db.movies.find({}, options, movies_callback(callback));
 };
 

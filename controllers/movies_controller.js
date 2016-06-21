@@ -35,7 +35,7 @@ var MoviesController = {
     };
 
     // products ordered in descending fashion
-    Movies.sort_by_day(options, function(error, movies) { // this is a callback
+    Movies.sort_by(options, function(error, movies) { // this is a callback
       if(error) {
         var err = new Error("No such movie");
         err.status = 404;
