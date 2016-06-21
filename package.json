@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "clear; ./node_modules/.bin/istanbul cover --include-all-sources ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/",
+    "test": "clear; ./node_modules/.bin/istanbul cover -x 'spec/**/*' -- ./node_modules/.bin/jasmine-node --captureExceptions --verbose spec/",
     "db:drop": "dropdb videoStore",
     "db:create": "createdb videoStore",
     "db:schema": "node tasks/load_schema.js",
