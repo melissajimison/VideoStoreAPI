@@ -10,5 +10,8 @@ router.get('/:title', RentalsController.find_movie);
 
 router.get('/:title/customers', RentalsController.current_customers);
 
+router.post('/:title/check-out/:id', RentalsController.checkout);
+
+
 
 module.exports = router;

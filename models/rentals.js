@@ -49,7 +49,17 @@ Rentals.find_customers_by_title = function(title, callback) {
       }));
     };
   });
-}
+};
 
-
+Rentals.mark_as_checkout = function(movie, id, callback) {
+  db.run("update rentals set customer_id=$1, status=rented from rentals inner join movies on rentals.movie_id = movies.id where title=$2",[id, movie], function(error, rental){
+    if(error) {
+      callback(error, undefined)
+    } else {
+      callback(null, rental)
+      console.log(rental);
+    };
+  });
+};
+>>>>>>> jimison
 module.exports = Rentals;

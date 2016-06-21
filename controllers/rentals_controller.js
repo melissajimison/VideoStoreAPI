@@ -46,10 +46,27 @@ var RentalsController = {
         obj["customers"] = customers;
         res.json(obj);
       }
-    });
-  }
+    })
+  },
+
+  checkout: function(req, res, next) {
+    var id = req.params.id;
+    var movie = req.params.title;
+  Rentals.mark_as_checkout (movie, id, function(error, customers) {
+    if(error) {
+      var err = new Error("No such movie");
+      err.status = 404;
+      next(err);
+    } else {
+
+
+
+
+    obj = {}
+    obj["id"] = id
+    obj["movie"] = movie
+
+    res.json(obj);
+  },
 };
-
-
-
 module.exports = RentalsController;
