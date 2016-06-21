@@ -6,10 +6,10 @@ describe("Endpoint at /", function () {
     return base_url + "customers" + endpoint;
   };
 
-  it('responds with a 200 status code', function (done) {
-    request.get(url('/'), function(error, response, body) {
-      expect(response.statusCode).toEqual(200);
-      done();
-    });
-  });
+  // it('responds with a 200 status code', function (done) {
+  //   request.get(url('/'), function(error, response, body) {
+  //     expect(response.statusCode).toEqual(200);
+  //     done();
+  //   });
+  // });
 });
