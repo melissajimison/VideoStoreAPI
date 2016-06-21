@@ -29,7 +29,7 @@ Rentals.find_by_customer = function(customer_id, callback) {
 // when movies are returned the customer id will be deleted from the rentals table
 
 Rentals.available = function(movie_id, callback){
-  db.rentals.find({movie_id: movie_id}, function(error, rentals) {
+  db.rentals.find({movie_id : movie_id, status: "available"}, function(error, rentals) {
     if(error || !rentals) {
       callback(error || new Error("Could not retrieve rentals"), undefined);
     } else {
