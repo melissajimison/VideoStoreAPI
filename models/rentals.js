@@ -53,11 +53,11 @@ Rentals.find_customers_by_title = function(title, callback) {
 
 Rentals.mark_as_checkout = function(movie, customer_id, callback) {
   // movie = "Jaws"
-  db.run("UPDATE rentals AS r SET customer_id = $1, status = 'rented' FROM movies AS m WHERE r.movie_id = (SELECT id FROM movies WHERE title=$2) RETURNING * ", [customer_id, movie], function(error, rental_count){
+  db.sql.rentals.checkout([customer_id, movie], function(error, result){
     if(error) {
       callback(error, undefined)
     } else {
-      callback(null, rental_count)
+      callback(null, result)
     };
   });
 };

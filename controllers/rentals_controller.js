@@ -54,7 +54,7 @@ var RentalsController = {
     var movie = req.params.title;
 
 
-    Rentals.mark_as_checkout (movie, customer_id, function(error, rental_count) {
+    Rentals.mark_as_checkout (movie, customer_id, function(error, rental_id) {
       if(error) {
         var err = new Error("No such movie");
         err.status = 404;
@@ -62,7 +62,7 @@ var RentalsController = {
       } else {
         obj = {}
         obj["status"] = 200
-        obj["message"] = rental_count
+        obj["message"] = rental_id
         res.json(obj);
       }
     })
