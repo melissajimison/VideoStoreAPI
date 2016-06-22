@@ -9,4 +9,4 @@ FROM (
     LIMIT 1
 ) AS result
 WHERE r.id=result.id
-RETURNING rentals.id;
+RETURNING *;

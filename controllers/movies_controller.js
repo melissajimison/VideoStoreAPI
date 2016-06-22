@@ -85,8 +85,6 @@ var MoviesController = {
       order_by = 'checkout_date';
     }
 
-    console.log(order_by);
-
     Movies.find_customers_by_history(movie, order_by, function(error, customers) {
       if(error) {
         var err = new Error("No such movie: " + error.message);

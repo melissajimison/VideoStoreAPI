@@ -1,7 +1,7 @@
 var Rentals = require('../models/rentals');
 var Movies = require("../models/movies");
 var Customers = require("../models/customers");
-var Histoy = require("../models/history");
+var History = require("../models/history");
 
 var RentalsController = {
 
@@ -54,18 +54,27 @@ var RentalsController = {
     var movie = req.params.title;
 
 
-    Rentals.mark_as_checkout (movie, customer_id, function(error, rental_id) {
+    Rentals.mark_as_checkout (movie, customer_id, function(error, rental_array) {
       if(error) {
-        var err = new Error("No such movie");
+        var err = new Error(error.message);
         err.status = 404;
         next(err);
       } else {
-        obj = {}
-        obj["status"] = 200
-        obj["message"] = rental_id
-        res.json(obj);
+        var rental_id = rental_array[0].id
+        History.create_record(rental_id, customer_id, function(error, history_result) {
+          if(error) {
+            var err = new Error(error.message);
+            err.status = 404;
+            next(err);
+          } else {
+            obj = {}
+            obj["status"] = 200;
+            obj["message"] = history_result;
+            res.json(obj);
+          }
+        });
       }
-    })
+    });
   }
 };
 module.exports = RentalsController;
