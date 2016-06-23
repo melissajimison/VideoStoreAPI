@@ -41,9 +41,9 @@ describe('MoviesController', function() {
       });
     });
 
-    it('responds with a 500 status code for mispelling', function(done) {
+    it('responds with a 200 status code for mispelling (by default sorts by id if invalid sort column given)', function(done) {
       request.get(url('/released-date?n=10&p=1'), function(error, response, body) {
-        expect(response.statusCode).toEqual(500);
+        expect(response.statusCode).toEqual(200);
         done();
       });
     });
