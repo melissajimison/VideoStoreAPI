@@ -7,7 +7,7 @@ var MoviesController = {
     Movies.all(function(error, movies) { // this is a callback
       if(error) {
         var err = new Error("Error retrieving movies list:\n" + error.message);
-        err.status = 404;
+        err.status = 500;
         next(err);
       } else {
         var obj = {};
@@ -38,7 +38,7 @@ var MoviesController = {
     Movies.sort_by(options, function(error, movies) { // this is a callback
       if(error) {
         var err = new Error("No such movie");
-        err.status = 404;
+        err.status = 500;
         next(err);
       } else {
         var obj = {};
@@ -59,7 +59,7 @@ var MoviesController = {
     Movies.find_customers_by_title(movie, function(error, customers) {
       if(error) {
         var err = new Error("No such movie");
-        err.status = 404;
+        err.status = 500;
         next(err);
       } else {
         var obj = {};
@@ -88,7 +88,7 @@ var MoviesController = {
     Movies.find_customers_by_history(movie, order_by, function(error, customers) {
       if(error) {
         var err = new Error("No such movie: " + error.message);
-        err.status = 404;
+        err.status = 500;
         next(err);
       } else {
         var obj = {};
