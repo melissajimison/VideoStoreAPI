@@ -85,7 +85,14 @@ var RentalsController = {
         err.status = 500;
         next(err);
       } else {
-        res.json(customers);
+        obj = {};
+        if (customers.length === 0) {
+          obj["status"] = 204;
+        } else {
+          obj["status"] = 200;
+        }
+        obj["customers"] = customers
+        res.json(obj);
       }
     })
   }
