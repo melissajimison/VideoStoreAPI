@@ -72,7 +72,8 @@ Rentals.update_custumer_credit = function (result, callback) {
 }
 
 Rentals.get_overdue = function(callback) {
-  db.sql.rentals.overdue(function(error, customers) {
+  var today = new Date().toLocaleDateString();
+  db.sql.history.overdue([today], function(error, customers) {
     if(error) {
       callback(error, undefined);
     } else {

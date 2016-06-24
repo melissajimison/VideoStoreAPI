@@ -10,4 +10,7 @@ SELECT customers.name, movies.title, history.checkout_date, history.return_date 
     ON rentals.movie_id = movies.id
       INNER JOIN customers
       ON history.customer_id = customers.id
-WHERE history.overdue = true;
+WHERE return_date < $1 AND rentals.status = 'rented';
+
+
+-- if the status in the rentals is 'rented' and the return date in the history table is before today
