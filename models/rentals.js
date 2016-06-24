@@ -56,20 +56,22 @@ Rentals.mark_as_checkout = function(movie, customer_id, callback) {
     if(error) {
       callback(error, undefined)
     } else {
-      Rentals.update_custumer_credit(result, callback)
+      Rentals.update_custumer_credit(result, customer_id, callback)
     };
   });
 };
 
-
-Rentals.update_custumer_credit = function (result, callback) {
+Rentals.update_custumer_credit = function (result, customer_id, callback) {
   var bonus = 0.50
-  var customer_id =result.customer_id
-  db.run("update customers set account_credit =$1 where id=$2", [bonus, customer_id], function (error, customer_updated) {
-    if (error) { callback(error, undefined) }
-    callback(null, result)
+  var customer_id = Number(customer_id)
+  db.sql.rentals.updatecustomer([bonus, customer_id], function (error, customer_updated) {
+    if (error) {
+      callback(error, undefined)
+    } else {
+      callback(null, result, customer_updated)
+    };
   });
-}
+};
 
 Rentals.get_overdue = function(callback) {
   var today = new Date().toLocaleDateString();
@@ -80,7 +82,19 @@ Rentals.get_overdue = function(callback) {
       callback(null, customers);
     }
   })
-}
+};
 
+Rentals.return_rental = function(customer_id, movie, callback){
+  //reach into the movies table, look by title, get movie_id, go to rentals, see that movie_id and customer_id matches
+  //change the status to available and delete the costumer-id or set it to cero
+
+  db.sql.rentals.retunMovie([customer_id, movie], function(error, updated_rental) {
+    if(error || !updated_rental) {
+      callback(error || new Error("Could not retrieve updated_rental"), undefined);
+    } else {
+      callback(null, updated_rental);
+    }
+  });
+};
 
 module.exports = Rentals
