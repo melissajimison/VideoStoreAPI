@@ -6,12 +6,10 @@ var RentalsController = require('../controllers/rentals_controller.js');
 // Look a movie up by title to see (/rentals/Jaws)
 router.get('/:title', RentalsController.find_movie);
 /* GET customers details. */
-// router.get('/:id/current', RentalsController.current);
-
 router.get('/:title/customers', RentalsController.current_customers);
 
 router.post('/:title/check-out/:id', RentalsController.checkout);
 
-
+router.post('/:title/return/:id', RentalsController.return_a_rental);
 
 module.exports = router;

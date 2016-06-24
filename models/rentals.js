@@ -74,4 +74,17 @@ Rentals.update_custumer_credit = function (result, customer_id, callback) {
   });
 };
 
+Rentals.return_rental = function(customer_id, movie, callback){
+  //reach into the movies table, look by title, get movie_id, go to rentals, see that movie_id and customer_id matches
+  //change the status to available and delete the costumer-id or set it to cero
+
+  db.sql.rentals.retunMovie([customer_id, movie], function(error, updated_rental) {
+    if(error || !updated_rental) {
+      callback(error || new Error("Could not retrieve updated_rental"), undefined);
+    } else {
+      callback(null, updated_rental);
+    }
+  });
+};
+
 module.exports = Rentals

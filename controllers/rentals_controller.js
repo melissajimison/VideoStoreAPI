@@ -69,7 +69,7 @@ var RentalsController = {
           } else {
             obj = {}
             obj["Status"] = 200;
-            obj["Message"] = "Checkout succesfully processed"
+            obj["Message"] = "Checkout has been processed succesfully"
             obj["Return day"] = history_result["return_date"]
             obj["Customer's Name"] = customer_updated[0]["name"]
             obj["Customer's Credit"] = customer_updated[0]["account_credit"]
@@ -79,6 +79,24 @@ var RentalsController = {
         });
       }
     });
-  }
+  },
+
+  return_a_rental: function(req, res, next) {
+    var customer_id = req.params.id;
+    var movie = req.params.title;
+    Rentals.return_rental(customer_id, movie, function(error, updated_rental) {
+      if(error) {
+        var err = new Error(error.message);
+        err.status = 404;
+        next(err);
+      } else {
+        obj = {}
+        obj["Status"] = 200;
+        obj["Message"] = "Return has been processed succesfully"
+        obj["Rental info"] = updated_rental[0]
+        res.json(obj);
+      }
+    })
+  },
 };
 module.exports = RentalsController;
