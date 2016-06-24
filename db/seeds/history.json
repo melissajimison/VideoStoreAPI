@@ -1,86 +1,74 @@
 [
 {
-"rental_id": 1,
-"customer_id": 1,
-"checkout_date": "2016-06-16",
-"return_date": "2016-06-26",
-"overdue": false
-},
-{
-"rental_id": 7,
-"customer_id": 3,
-"checkout_date": "2016-06-17",
-"return_date": "2016-06-27",
-"overdue": false
-},
-{
-"rental_id": 12,
+"rental_id": 33,
 "customer_id": 2,
-"checkout_date": "2016-06-18",
-"return_date": "2016-06-28",
-"overdue": false
-},
-{
-"rental_id": 4,
-"customer_id": 1,
-"checkout_date": "2016-06-19",
-"return_date": "2016-06-29",
-"overdue": false
+"checkout_date": "4/16/2016",
+"return_date": "4/26/2016"
 },
 {
 "rental_id": 9,
-"customer_id": 11,
-"checkout_date": "2016-06-10",
-"return_date": "2016-06-20",
-"overdue": true
+"customer_id": 2,
+"checkout_date": "6/17/2016",
+"return_date": "6/27/2016"
 },
 {
-"rental_id": 14,
+"rental_id": 15,
 "customer_id": 2,
-"checkout_date": "2016-06-06",
-"return_date": "2016-06-16",
-"overdue": true
+"checkout_date": "6/18/2016",
+"return_date": "6/28/2016"
+},
+{
+"rental_id": 2,
+"customer_id": 4,
+"checkout_date": "2/19/2016",
+"return_date": "2/29/2016"
+},
+{
+"rental_id": 10,
+"customer_id": 4,
+"checkout_date": "6/10/2016",
+"return_date": "6/20/2016"
+},
+{
+"rental_id": 21,
+"customer_id": 4,
+"checkout_date": "6/6/2016",
+"return_date": "6/16/2016"
 },
 {
 "rental_id": 2,
 "customer_id": 1,
-"checkout_date": "2016-06-16",
-"return_date": "2016-06-26",
-"overdue": false
+"checkout_date": "6/16/2016",
+"return_date": "6/26/2016"
 },
 {
 "rental_id": 3,
 "customer_id": 3,
-"checkout_date": "2016-07-10",
-"return_date": "2016-07-20",
-"overdue": true
+"checkout_date": "7/10/2016",
+"return_date": "7/20/2016"
 },
 {
 "rental_id": 12,
 "customer_id": 2,
-"checkout_date": "2016-03-13",
-"return_date": "2016-04-23",
-"overdue": false
+"checkout_date": "3/13/2016",
+"return_date": "4/23/2016"
 },
 {
 "rental_id": 4,
 "customer_id": 1,
-"checkout_date": "2016-06-16",
-"return_date": "2016-06-26",
-"overdue": false
+"checkout_date": "6/16/2016",
+"return_date": "6/26/2016"
 },
 {
 "rental_id": 6,
 "customer_id": 11,
-"checkout_date": "2016-06-16",
-"return_date": "2016-06-26",
-"overdue": false
+"checkout_date": "6/16/2016",
+"return_date": "6/26/2016"
 },
 {
 "rental_id": 5,
 "customer_id": 2,
-"checkout_date": "2016-06-12",
-"return_date": "2016-06-22",
-"overdue": false
+"checkout_date": "6/12/2016",
+"return_date": "6/22/2016"
 }
 ]

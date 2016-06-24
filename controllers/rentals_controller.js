@@ -75,6 +75,27 @@ var RentalsController = {
         });
       }
     });
+  },
+
+  // include customer name, movie title, check-out date, and return date
+  overdue: function(req, res, next) {
+    Rentals.get_overdue(function(error, customers) {
+      if(error) {
+        var err = new Error(error.message);
+        err.status = 500;
+        next(err);
+      } else {
+        obj = {};
+        if (customers.length === 0) {
+          obj["status"] = 204;
+        } else {
+          obj["status"] = 200;
+        }
+        obj["customers"] = customers
+        res.json(obj);
+      }
+    })
   }
 };
+
 module.exports = RentalsController;

@@ -8,8 +8,6 @@ var History = function(history) {
   this.customer_id = history.customer_id;
   this.checkout_date = history.checkout_date;
   this.return_date = history.return_date;
-  this.overdue = history.overdue;
-
 };
 
 History.getPastRentalHistory = function(customer_id, callback) {
@@ -23,7 +21,7 @@ History.getPastRentalHistory = function(customer_id, callback) {
 };
 
 History.create_record = function(rental_id, customer_id, callback) {
-  db.history.save({rental_id: rental_id, customer_id: customer_id, checkout_date: new Date(), return_date: make_return_date(), overdue: false}, function(error,inserted){
+  db.history.save({rental_id: rental_id, customer_id: customer_id, checkout_date: new Date().toLocaleDateString(), return_date: make_return_date()}, function(error,inserted){
     if(error) {
       callback(error, undefined);
     } else {
@@ -36,7 +34,7 @@ function make_return_date() {
   var date = new Date();
   var return_days = 10;
   date.setDate(date.getDate() + return_days); 
-  return date;
+  return date.toLocaleDateString();
 }
 
 
