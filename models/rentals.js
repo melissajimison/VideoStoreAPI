@@ -49,7 +49,16 @@ Rentals.find_customers_by_title = function(title, callback) {
       }));
     };
   });
-}
+};
 
-
-module.exports = Rentals;
+Rentals.mark_as_checkout = function(movie, customer_id, callback) {
+  // movie = "Jaws"
+  db.sql.rentals.checkout([customer_id, movie], function(error, result){
+    if(error) {
+      callback(error, undefined)
+    } else {
+      callback(null, result)
+    };
+  });
+};
+module.exports = Rentals

@@ -21,5 +21,22 @@ History.getPastRentalHistory = function(customer_id, callback) {
   });
 };
 
+History.create_record = function(rental_id, customer_id, callback) {
+  db.history.save({rental_id: rental_id, customer_id: customer_id, checkout_date: new Date(), return_date: make_return_date(), overdue: false}, function(error,inserted){
+    if(error) {
+      callback(error, undefined);
+    } else {
+      callback(null, inserted);
+    }
+  });
+}
+
+function make_return_date() {
+  var date = new Date();
+  var return_days = 10;
+  date.setDate(date.getDate() + return_days); 
+  return date;
+}
+
 
 module.exports = History;
