@@ -54,7 +54,7 @@ var RentalsController = {
     var movie = req.params.title;
 
 
-    Rentals.mark_as_checkout (movie, customer_id, function(error, rental_array) {
+    Rentals.mark_as_checkout (movie, customer_id, function(error, rental_array, customer_updated) {
       if(error) {
         var err = new Error(error.message);
         err.status = 404;
@@ -68,8 +68,12 @@ var RentalsController = {
             next(err);
           } else {
             obj = {}
-            obj["status"] = 200;
-            obj["message"] = history_result;
+            obj["Status"] = 200;
+            obj["Message"] = "Checkout succesfully processed"
+            obj["Return day"] = history_result["return_date"]
+            obj["Customer's Name"] = customer_updated[0]["name"]
+            obj["Customer's Credit"] = customer_updated[0]["account_credit"]
+
             res.json(obj);
           }
         });
