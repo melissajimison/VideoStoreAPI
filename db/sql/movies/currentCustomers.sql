@@ -1,4 +1,4 @@
-SELECT customers.name, customers.phone, customers.account_credit FROM movies 
+SELECT customers.name, customers.phone, customers.account_credit FROM movies
   INNER JOIN rentals
   ON movies.id=rentals.movie_id
     INNER JOIN customers

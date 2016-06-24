@@ -10,21 +10,14 @@ var CustomersController = {
         err.status = 500;
         next(err);
       } else {
-        var obj = {};
-        if (customers.length === 0) {
-        obj["status"] = 204;
-        } else {
-        obj["status"] = 200;
-        }
-        obj["customers"] = customers;
-        res.json(obj);
+        res.json(customers);
+        // var locals = { accounts : accounts};
+        // res.render("accounts/index",locals);
         }
     });
   },
 
-// the word phone breaks the code:
   sort: function(req, res, next) {
-    if(req.params.column === "name" || req.params.column === "registered_at" || req.params.column === "postal_code") {
     //Send in an ORDER clause and a LIMIT with OFFSET
     var options = {
       limit : req.query.n,
@@ -40,22 +33,9 @@ var CustomersController = {
         err.status = 404;
         next(err);
       } else {
-        var obj = {};
-        if (customers.length === 0) {
-          obj["status"] = 204;
-        } else {
-          obj["status"] = 200;
-        }
-        obj["customers"] = customers;
-        res.json(obj);
+        res.json(customers);
       }
     });
-  } else {
-    var obj = {};
-    obj["status"] = 400;
-    obj["message"] = "invalid request";
-    res.json(obj);
-  }
   },
   // this is a property whose value is a function (this is now a method)
   // this is the response from node
