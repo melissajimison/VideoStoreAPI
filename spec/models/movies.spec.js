@@ -108,7 +108,7 @@ describe('Movies', function () {
 
     it('can order by name', function(done) {
       Movies.find_customers_by_history("Psycho", "name", function(error, customers) {
-        expect(customers[0].id).toEqual(11);
+        expect(customers[0].id).toEqual(4);
         expect(customers[customers.length-1].id).toEqual(1);
         done();
       });
@@ -116,7 +116,7 @@ describe('Movies', function () {
 
     it('can order by checkout_date', function(done) {
       Movies.find_customers_by_history("Psycho", "checkout_date", function(error, customers) {
-        expect(customers[0].id).toEqual(2);
+        expect(customers[0].id).toEqual(4);
         expect(customers[customers.length-1].id).toEqual(3);
         done();
       });
