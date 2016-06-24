@@ -13,13 +13,31 @@ describe("Endpoint at /", function () {
       done();
     });
   });
+});
 
-  it('the returned json data has the right keys', function(done) {
-    request.get('/', function(error, response, body) {
-      // var data = JSON.parse(body);
-      expect(body).toEqual("melissa");
-      expect(Object.keys(data)).toEqual(['']);
-      done();
+  describe("Endpoint at /sort", function() {
+    var url = function(endpoint) {
+      return base_url + "customers/sort" + endpoint;
+    };
+
+    it('responds with a 200 status code for a valid url', function(done) {
+      request.get(url('/name?n=10&p=2'), function(error, response, body) {
+        expect(JSON.parse(body).status).toEqual(200);
+        done();
+      });
     });
-  });
+
+    it('responds with a 200 status code for a valid url', function(done) {
+      request.get(url('/registered_at?n=10&p=2'), function(error, response, body) {
+        expect(JSON.parse(body).status).toEqual(200);
+        done();
+      });
+    });
+
+    it('responds with a 200 status code for a valid url', function(done) {
+      request.get(url('/postal_code?n=10&p=2'), function(error, response, body) {
+        expect(JSON.parse(body).status).toEqual(200);
+        done();
+      });
+    });
 });
