@@ -38,6 +38,8 @@ Movies.find_customers_by_history = function(title, order_by, callback) {
     db.sql.movies.historyCustomersByName(title, customer_callback(callback));
   } else if (order_by === 'checkout_date') {
     db.sql.movies.historyCustomersByDate(title, customer_callback(callback));
+  } else {
+    db.sql.movies.historyCustomersDefault(title, customer_callback(callback));
   }
 }
 

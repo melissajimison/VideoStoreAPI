@@ -6,4 +6,4 @@ SELECT customers.id, customers.name, customers.phone, customers.account_credit, 
       INNER JOIN customers
       ON history.customer_id=customers.id
 WHERE title = $1
-ORDER BY history.checkout_date;
+ORDER BY customers.id;

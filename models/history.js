@@ -8,6 +8,7 @@ var History = function(history) {
   this.customer_id = history.customer_id;
   this.checkout_date = history.checkout_date;
   this.return_date = history.return_date;
+  this.overdue = history.overdue;
 
 };
 
@@ -26,7 +27,7 @@ History.create_record = function(rental_id, customer_id, callback) {
     if(error) {
       callback(error, undefined);
     } else {
-      callback(null, inserted);
+      callback(null, new History(inserted));
     }
   });
 }

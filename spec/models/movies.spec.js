@@ -2,6 +2,7 @@ var app = require("../../app");
 var db = app.get("db");
 
 var Movies = require('../../models/movies');
+var Customers = require('../../models/customers');
 
 describe('Movies', function () {
   var options_release = {
@@ -17,7 +18,6 @@ describe('Movies', function () {
   };
 
   afterEach(function () {
-    // delete all the accounts I created
     db.end();
   });
 
@@ -59,8 +59,8 @@ describe('Movies', function () {
         expect(movies[0].title).toEqual("2001: A Space Odyssey");
         expect(movies[0].id).toEqual(40);
         done();
-      })
-    })
+      });
+    });
   });
 
   describe('#find', function () {
@@ -76,6 +76,59 @@ describe('Movies', function () {
     });
   });
 
+  describe('#find_customers_by_title', function() {
+    it('should return an Array of Customer instances', function(done) {
+      Movies.find_customers_by_title("Jaws", function(error, customers) {
+        expect(error).toBeNull;
+        expect(customers).toEqual(jasmine.any(Array));
+        expect(customers[0]).toEqual(jasmine.any(Customers));
+        done();
+      });
+    });
 
+    it('should return only name, phone, and account_credit info for each customer', function(done) {
+      Movies.find_customers_by_title("Jaws", function(error, customers) {
+        expect(customers[0].name).toNotBe(undefined);
+        expect(customers[0].phone).toNotBe(undefined);
+        expect(customers[0].account_credit).toNotBe(undefined);
+        done();
+      });
+    });
+  });
+
+  describe('#find_customers_by_history', function() {
+    it('should return an Array of Customer instances', function(done) {
+      Movies.find_customers_by_history("Jaws", "name", function(error, customers) {
+        expect(error).toBeNull;
+        expect(customers).toEqual(jasmine.any(Array));
+        expect(customers[0]).toEqual(jasmine.any(Customers));
+        done();
+      });
+    });
+
+    it('can order by name', function(done) {
+      Movies.find_customers_by_history("Psycho", "name", function(error, customers) {
+        expect(customers[0].id).toEqual(11);
+        expect(customers[customers.length-1].id).toEqual(1);
+        done();
+      });
+    });
+
+    it('can order by checkout_date', function(done) {
+      Movies.find_customers_by_history("Psycho", "checkout_date", function(error, customers) {
+        expect(customers[0].id).toEqual(2);
+        expect(customers[customers.length-1].id).toEqual(3);
+        done();
+      });
+    });
+
+    it('orders by id by default if an invalid sort column was given', function(done) {
+      Movies.find_customers_by_history("Psycho", "blahblahblah", function(error, customers) {
+        expect(customers[0].id).toEqual(1);
+        expect(customers[customers.length-1].id).toEqual(11);
+        done();
+      });
+    });
+  });
 });
 
