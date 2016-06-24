@@ -68,6 +68,16 @@ Rentals.update_custumer_credit = function (result, callback) {
   db.run("update customers set account_credit =$1 where id=$2", [bonus, customer_id], function (error, customer_updated) {
     if (error) { callback(error, undefined) }
     callback(null, result)
+  });
+}
+
+Rentals.get_overdue = function(callback) {
+  db.sql.rentals.overdue(function(error, customers) {
+    if(error) {
+      callback(error, undefined);
+    } else {
+      callback(null, customers);
+    }
   })
 }
 
