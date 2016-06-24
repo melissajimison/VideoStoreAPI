@@ -11,10 +11,9 @@ router.get('/zomg', function(req, res, next) {
   res.status(200).json({it_works: 'it works!'});
 });
 
-// router.get('/api/docs.json', function (req, res, next){
-//   res.status(200).json(docs);
-// });
+router.get('/api/docs.json', IndexController.getJSON);
 
-router.get('/api/docs.json', IndexController.getjson);
+router.get('/api/docs', IndexController.getHTML);
+
 
 module.exports = router;

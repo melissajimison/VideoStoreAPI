@@ -1,9 +1,21 @@
-var docs = require ("../json.js");
+var doc = require ("../doc.json");
+
 
 var IndexController = {
-  getjson: function (req, res, next) {
-    res.status(200).json(docs);
+  locals: {
+    documentation: doc
+  },
+
+  getJSON: function (req, res, next) {
+    res.json(200, doc);
+  },
+
+  getHTML: function(req, res, next) {
+    // console.log(string_docs);
+    res.render('docs', IndexController.locals);
   }
 };
+
+
 
 module.exports = IndexController;
