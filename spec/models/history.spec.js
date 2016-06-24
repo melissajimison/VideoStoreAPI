@@ -17,9 +17,22 @@ describe('History', function () {
         expect(result.customer_id).toNotBe(null);
         expect(result.checkout_date).toNotBe(null);
         expect(result.return_date).toNotBe(null);
-        expect(result.overdue).toBe(false);
         db.history.destroy({id: result.id}, function(err, res){done()});
       });
     });
   });
+
+  describe('#getPastRentalHistory', function() {
+    it('returns an array of customer id, checkout date, and return date', function(done) {
+      History.getPastRentalHistory(1, function(error, result) {
+        expect(error).toBeNull;
+        expect(result).toEqual(jasmine.any(Array));
+        expect(result[0].customer_id).toBe(1);
+        expect(result[0].checkout_date).toNotBe(null);
+        expect(result[0].return_date).toNotBe(null);
+        expect(Object.keys(result[0])).toEqual(['customer_id', 'checkout_date', 'return_date']);
+        done();
+      })
+    })
+  })
 });
