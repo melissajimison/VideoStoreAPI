@@ -52,13 +52,24 @@ Rentals.find_customers_by_title = function(title, callback) {
 };
 
 Rentals.mark_as_checkout = function(movie, customer_id, callback) {
-  // movie = "Jaws"
   db.sql.rentals.checkout([customer_id, movie], function(error, result){
     if(error) {
       callback(error, undefined)
     } else {
-      callback(null, result)
+      Rentals.update_custumer_credit(result, callback)
     };
   });
 };
+
+
+Rentals.update_custumer_credit = function (result, callback) {
+  var bonus = 0.50
+  var customer_id =result.customer_id
+  db.run("update customers set account_credit =$1 where id=$2", [bonus, customer_id], function (error, customer_updated) {
+    if (error) { callback(error, undefined) }
+    callback(null, result)
+  })
+}
+
+
 module.exports = Rentals
