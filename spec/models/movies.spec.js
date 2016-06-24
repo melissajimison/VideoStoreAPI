@@ -106,13 +106,6 @@ describe('Movies', function () {
       });
     });
 
-    it('returns 8 instances of history for the movie Psycho', function(done) {
-      Movies.find_customers_by_history("Psycho", "name", function(error, customers) {
-        expect(customers.length).toEqual(8);
-        done();
-      });
-    });
-
     it('can order by name', function(done) {
       Movies.find_customers_by_history("Psycho", "name", function(error, customers) {
         expect(customers[0].id).toEqual(11);
