@@ -12,12 +12,12 @@ var app = module.exports = express();
 var connectionString = "postgres://localhost/videoStore";
 // the node module that is used to access the database
 var db = massive.connectSync({connectionString: connectionString});
-// this gives me a way to grab the database from the code, like in the model 
+// this gives me a way to grab the database from the code, like in the model
 app.set('db', db);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
