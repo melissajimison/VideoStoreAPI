@@ -19,4 +19,22 @@ describe('Customers', function () {
       });
     });
   });
+
+  describe('#sort_by', function () {
+      var options_release = {
+        limit : 5,
+        order : 'name',
+        offset: 1
+      };
+
+
+    it('should return an array of 5 Customers if limit is set to 5', function (done) {
+      Movies.sort_by(options_release, function (error, movies) {
+        expect(error).toBeNull;
+        expect(movies).toEqual(jasmine.any(Array));
+        expect(movies.length).toEqual(5);
+        done();
+      });
+    });
+  });
 });
