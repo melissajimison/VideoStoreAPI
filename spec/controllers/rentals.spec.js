@@ -82,14 +82,14 @@ describe('RentalsController', function() {
       request.get(url('/Jaws/customers'), function(error, response, body) {
         var body_parsed = JSON.parse(body)
         expect(body_parsed["customers"]).toEqual(jasmine.any(Array))
-        expect(body_parsed["customers"][0]["name"]).toEqual("Curran Stout")
-        expect(body_parsed["customers"][0]["registered_at"]).toEqual("Wed, 16 Apr 2014 21:40:20 -0700")
-        expect(body_parsed["customers"][0]["address"]).toEqual("Ap #658-1540 Erat Rd.")
-        expect(body_parsed["customers"][0]["city"]).toEqual("San Francisco")
-        expect(body_parsed["customers"][0]["state"]).toEqual("California")
-        expect(body_parsed["customers"][0]["postal_code"]).toEqual("94267")
-        expect(body_parsed["customers"][0]["phone"]).toEqual("(908) 949-6758")
-        expect(body_parsed["customers"][0]["account_credit"]).toEqual("35.66")
+        expect(typeof body_parsed["customers"][0]["name"]).toEqual("string")
+        expect(typeof body_parsed["customers"][0]["registered_at"]).toEqual("string")
+        expect(typeof body_parsed["customers"][0]["address"]).toEqual("string")
+        expect(typeof body_parsed["customers"][0]["city"]).toEqual("string")
+        expect(typeof body_parsed["customers"][0]["state"]).toEqual("string")
+        expect(typeof body_parsed["customers"][0]["postal_code"]).toEqual("string")
+        expect(typeof body_parsed["customers"][0]["phone"]).toEqual("string")
+        expect(typeof body_parsed["customers"][0]["account_credit"]).toEqual("string")
         done();
       });
     });
@@ -125,7 +125,7 @@ describe('RentalsController', function() {
   //       expect(response.statusCode).toEqual(200)
   //       expect(typeof body).toEqual("string")
   //       expect(typeof body_parsed).toEqual("object")
-  //       expect(body_parsed).toEqual(200)
+  //       expect(body_parsed["Status"]).toEqual(200)
   //       done();
   //     });
   //   });
@@ -137,8 +137,8 @@ describe('RentalsController', function() {
     //     expect(body_parsed["Message"]).toEqual("Checkout has been processed succesfully")
     //     expect(typeof body_parsed["Message"]).toEqual("string")
     //     expect(body_parsed["Customer's Name"]).toEqual("Barbara Jacobson")
-    //     expect(body_parsed["Return day"]).toEqual("string")
-    //     expect(body_parsed["Customer's Credit"]).toEqual("13.91")
+    //     expect(typeof body_parsed["Return day"]).toEqual("string")
+    //     expect(body_parsed["Customer's Credit"]).toEqual("13.41")
     //     done();
     //   });
     // });
